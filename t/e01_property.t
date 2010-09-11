@@ -11,7 +11,7 @@ BEGIN {
     use _unicode_handling;
 }
 
-use JSON;
+use JSON::PP;
 
 my @simples = 
     qw/utf8 indent canonical space_before space_after allow_nonref shrink allow_blessed
@@ -27,7 +27,7 @@ SKIP: {
     skip "UNICODE handling is disabale.", 14 unless $JSON::can_handle_UTF16_and_utf8;
 }
 
-my $json = new JSON;
+my $json = new JSON::PP;
 
 for my $name (@simples) {
     my $method = 'get_' . $name;
@@ -55,13 +55,18 @@ $json->max_size();
 ok($json->get_max_size == 0, 'get_max_size no arg');
 
 
-for my $name (@simples) {
-    $json->$name();
-    ok($json->property($name), $name);
-    $json->$name(0);
-    ok(! $json->property($name), $name);
-    $json->$name();
-    ok($json->property($name), $name);
+TODO: {
+    todo_skip 'JSON::PP does not support "property" at this time', @simples*3;
+    eval {
+        for my $name (@simples) {
+            $json->$name();
+            ok($json->property($name), $name);
+            $json->$name(0);
+            ok(! $json->property($name), $name);
+            $json->$name();
+            ok($json->property($name), $name);
+        }
+    };
 }
 
 
