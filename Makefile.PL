@@ -21,7 +21,7 @@ WriteMakefile(
     'VERSION_FROM'  => 'lib/JSON/PP.pm', # finds $VERSION
     'PREREQ_PM'     => {
               'Test::More'  => 0,
-              'JSON::PP5005' => '2.00',
+              'JSON::PP::Compat' => '2.00',
     },
     ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM => 'lib/JSON/PP.pm', # retrieve abstract from module
