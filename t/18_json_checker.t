@@ -3,7 +3,7 @@
 # use the testsuite from http://www.json.org/JSON_checker/
 # except for fail18.json, as we do not support a depth of 20 (but 16 and 32).
 
-# copied over from JSON::XS and modified to use JSON
+# copied over from JSON::XS and modified to use JSON::PP
 
 use strict;
 #no warnings;
@@ -12,9 +12,9 @@ use Test::More;
 BEGIN { plan tests => 39 };
 BEGIN { $ENV{PERL_JSON_BACKEND} = 0; }
 
-use JSON;
+use JSON::PP;
 
-my $json = JSON->new->utf8->max_depth(32)->canonical;
+my $json = JSON::PP->new->utf8->max_depth(32)->canonical;
 
 binmode DATA;
 my $num = 1;
