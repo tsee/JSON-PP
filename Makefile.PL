@@ -5,7 +5,6 @@ use ExtUtils::MakeMaker;
 print <<EOF;
 Welcome to JSON::PP
 ===================
-$message
 
  ************************** CAUTION **************************
  * This is 'JSON version 2' or higher and there are many     *
