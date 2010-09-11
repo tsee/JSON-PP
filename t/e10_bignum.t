@@ -5,7 +5,9 @@ BEGIN { plan tests => 6 };
 
 BEGIN { $ENV{PERL_JSON_BACKEND} = 0; }
 
-use JSON -support_by_pp;
+# This used to read:
+# use JSON -support_by_pp;
+use JSON::PP;
 
 eval q| require Math::BigInt |;
 
@@ -17,7 +19,7 @@ my $fix =  !Math::BigInt->VERSION       ? '+'
           : '';
 
 
-my $json = new JSON;
+my $json = new JSON::PP;
 
 $json->allow_nonref->allow_bignum(1);
 $json->convert_blessed->allow_blessed;
